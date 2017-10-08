@@ -1,0 +1,21 @@
+##docker-compose.yml
+
+app:
+  image: node:latest
+  ports:
+    - "3000:3000"
+  links:
+    - neo4j
+  volumes:
+    - ./app:/app
+  working_dir: /app
+  entrypoint: node app.js
+
+neo4j:
+  image: neo4j:3.0
+  ports:
+    - "7474:7474"
+    - "7687:7687"
+  volumes:
+    - ./neo4j/data:/data
+    - ./neo4j/logs:/logs
